@@ -4,6 +4,9 @@ const {
   signIn,
   sendWeaknessStrengthLearningPreference,
   updateLearningPath,
+  updateScore,
+  getAllUsersByScore,
+  getScore,
 } = require("../controllers/UserControllers"); // Import the signUp function
 const authMiddleware = require("../middleware/middleware");
 const router = express.Router();
@@ -17,5 +20,7 @@ router.post(
   sendWeaknessStrengthLearningPreference
 );
 router.patch("/learning-path/:userId", updateLearningPath); // New route for updating learning path
-
+router.patch("/score/:userId", updateScore); // New route for updating score
+router.get("/all-users", getAllUsersByScore); // New route for getting all users by score
+router.get("/score/:userId", getScore); // New route for getting score
 module.exports = router;

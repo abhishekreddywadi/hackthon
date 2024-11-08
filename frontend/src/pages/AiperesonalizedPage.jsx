@@ -62,12 +62,21 @@ function AiperesonalizedPage() {
     navigate(`/ai-personalized/${subtopic}`);
   };
 
-  const handleFinished = (subtopic) => {
+  const handleFinished = async (subtopic) => {
     console.log(`Finished subtopic: ${subtopic}`);
-    setFinishedSubtopics((prev) => ({
-      ...prev,
-      [subtopic]: true,
-    }));
+    setFinishedSubtopics((prev) => {
+      const updated = { ...prev, [subtopic]: true };
+      localStorage.setItem("finishedSubtopics", JSON.stringify(updated)); // Store in local storage
+      return updated;
+    });
+
+    const response = await axios.patch(
+      `http://localhost:5000/api/students/score/${userId}`,
+      {
+        score: 10,
+      }
+    );
+    console.log("Score response:", response.data);
   };
 
   const handleQuiz = (subtopic) => {
@@ -82,17 +91,37 @@ function AiperesonalizedPage() {
     }));
   };
 
-  // Calculate progress
+  const fetchScore = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/api/students/score/${userId}`
+      );
+      console.log("Fetched score:", response.data.score);
+      setScores((prevScores) => ({
+        ...prevScores,
+        totalScore: response.data.score,
+      }));
+    } catch (error) {
+      console.error("Error fetching score:", error);
+    }
+  };
+
+  // Calculate progress based on scores
   const totalSubtopics = path.length;
-  const finishedCount = Object.keys(finishedSubtopics).filter(
-    (key) => finishedSubtopics[key]
-  ).length;
+  const totalScore = Object.values(scores).reduce(
+    (acc, score) => acc + (score || 0),
+    0
+  );
   const progressPercentage =
-    totalSubtopics > 0 ? (finishedCount / totalSubtopics) * 100 : 0;
+    totalSubtopics > 0 ? (totalScore / (totalSubtopics * 100)) * 100 : 0;
+
+  useEffect(() => {
+    handleClick();
+    fetchScore();
+  }, []);
 
   return (
-    <div>
-      <button onClick={handleClick}>Generate Learning Path</button>
+    <div className="p-6 bg-gray-50 min-h-screen">
       {/* Progress Bar */}
       <div className="mt-4">
         <h2 className="text-lg font-bold">
@@ -100,18 +129,21 @@ function AiperesonalizedPage() {
         </h2>
         <div className="bg-gray-200 rounded-full h-4">
           <div
-            className="bg-green-500 h-4 rounded-full"
+            className="bg-green-500 h-4 rounded-full transition-all duration-300"
             style={{ width: `${progressPercentage}%` }}
           />
         </div>
       </div>
-      <div className="mt-4">
+      <div className="mt-6">
         {path.length > 0 && (
           <ul className="list-disc pl-5">
             {path.map((subtopic, index) => (
-              <li key={index} className="mb-4">
+              <li
+                key={index}
+                className="mb-6 p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-200"
+              >
                 <div
-                  className="cursor-pointer text-blue-500 hover:underline"
+                  className="cursor-pointer text-blue-500 hover:underline text-xl font-semibold"
                   onClick={() => handleSubtopicClick(subtopic)}
                 >
                   {subtopic}
@@ -119,18 +151,18 @@ function AiperesonalizedPage() {
                 <div className="mt-2">
                   <button
                     onClick={() => handleFinished(subtopic)}
-                    className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+                    className="bg-green-500 text-white px-4 py-2 rounded-lg mr-2 transition duration-200 hover:bg-green-600"
                   >
                     Finished
                   </button>
                   <button
                     onClick={() => handleQuiz(subtopic)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-lg transition duration-200 hover:bg-blue-600"
                   >
                     Go for Quiz
                   </button>
                   {finishedSubtopics[subtopic] && (
-                    <button className="bg-blue-300 text-white px-4 py-2 rounded ml-2">
+                    <button className="bg-blue-300 text-white px-4 py-2 rounded-lg ml-2">
                       Finished!
                     </button>
                   )}
@@ -144,7 +176,7 @@ function AiperesonalizedPage() {
                     onChange={(e) =>
                       handleScoreChange(subtopic, Number(e.target.value))
                     }
-                    className="border rounded p-1 mt-1"
+                    className="border border-gray-300 rounded p-2 mt-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
                   />
                   <p className="text-sm text-gray-500">
                     Score: {scores[subtopic] || 0}

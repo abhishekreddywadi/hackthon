@@ -9,6 +9,7 @@ const studentSchema = new mongoose.Schema({
   weaknesses: [String],
   learningPath: [String],
   preferences: { type: String, enum: ["visual", "auditory", "self reading"] },
+  score: { type: Number },
 });
 
 module.exports = mongoose.model("Student", studentSchema);

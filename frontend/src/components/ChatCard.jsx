@@ -8,9 +8,10 @@ function ChatCard() {
   return (
     <div
       onClick={handleClick}
-      className="card shadow-lg rounded-lg p-4 bg-white"
+      className="card shadow-lg rounded-lg p-6 bg-white transition-transform transform hover:scale-105 hover:shadow-2xl cursor-pointer"
     >
-      <h2 className="text-lg font-semibold text-gray-800">Chat with Bot</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-2">Chat with Bot</h2>
+      <p className="text-gray-600">Click here to start a conversation!</p>
     </div>
   );
 }

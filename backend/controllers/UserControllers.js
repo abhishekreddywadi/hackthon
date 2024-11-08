@@ -131,10 +131,40 @@ const updateLearningPath = async (req, res) => {
     res.status(500).json({ message: "Error updating learning path", error });
   }
 };
+const updateScore = async (req, res) => {
+  const { score } = req.body;
+  const userId = req.params.userId;
+  if (!score || !userId) {
+    return res.status(400).json({ message: "Score and userId are required" });
+  }
+  await User.findByIdAndUpdate(userId, { $inc: { score: score } });
+  res.status(200).json({ message: "Score updated successfully" });
+};
+const getScore = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const user = await User.findById(userId).select("score");
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+    res.status(200).json({ score: user.score });
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving score", error });
+  }
+};
+
+// get all the user according to the score
+const getAllUsersByScore = async (req, res) => {
+  const users = await User.find({}).sort({ score: -1 });
+  res.status(200).json(users);
+};
 
 module.exports = {
   signUp,
   signIn,
   sendWeaknessStrengthLearningPreference,
   updateLearningPath,
+  updateScore,
+  getAllUsersByScore,
+  getScore,
 };

@@ -17,12 +17,10 @@ const SignIn = () => {
       const response = await axios.post(
         "http://localhost:5000/api/students/signin",
         { email, password }
-        // { withCredentials: true }
       );
       localStorage.setItem("userId", response.data.userId);
-
       navigate("/");
-      console.log(response.data); // Handle successful sign-in (e.g., store token, redirect)
+      console.log(response.data); // Handle successful sign-in
     } catch (err) {
       setError("Invalid email or password");
       console.log(err?.message);
@@ -30,29 +28,37 @@ const SignIn = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4">
-      <h2>Sign In</h2>
-      {error && <p className="text-red-500">{error}</p>}
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        className="border p-2 mb-2"
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-        className="border p-2 mb-2"
-      />
-      <button type="submit" className="bg-blue-500 text-white p-2">
-        Sign In
-      </button>
-    </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-lg shadow-md w-96"
+      >
+        <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="border border-gray-300 p-3 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          className="border border-gray-300 p-3 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-3 rounded-lg w-full hover:bg-blue-600 transition duration-200"
+        >
+          Sign In
+        </button>
+      </form>
+    </div>
   );
 };
 

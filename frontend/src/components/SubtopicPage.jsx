@@ -41,13 +41,22 @@ function SubtopicPage() {
   }, [subtopic]); // Call the function to fetch movie results on component mount or when subtopic changes
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Videos for: {subtopic}</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div className="p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
+        Videos for: {subtopic}
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {data.length > 0 ? (
-          data.map((video) => <VideoCard key={video.link} video={video} />)
+          data.map((video) => (
+            <div
+              className="transition-transform transform hover:scale-105"
+              key={video.link}
+            >
+              <VideoCard video={video} />
+            </div>
+          ))
         ) : (
-          <p>No videos found.</p>
+          <p className="text-center text-gray-600">No videos found.</p>
         )}
       </div>
     </div>
