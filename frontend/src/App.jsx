@@ -7,6 +7,8 @@ import AiperesonalizedPage from "./pages/AiperesonalizedPage";
 import SubtopicPage from "./components/SubtopicPage";
 import Quiz from "./components/Quiz";
 import ChatWithAi from "./pages/ChatWithAi";
+import Documents from "./components/Documents";
+import LeaderBoard from "./components/LeaderBoard";
 
 function App() {
   return (
@@ -18,8 +20,10 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/ai-personalized" element={<AiperesonalizedPage />} />
           <Route path="/ai-personalized/:subtopic" element={<SubtopicPage />} />
+          <Route path="/documents/:subtopic" element={<Documents />} />
           <Route path="/quiz/:subtopic" element={<Quiz />} />
           <Route path="/chat" element={<ChatWithAi />} />
+          <Route path="/leaderboard" element={<LeaderBoard />} />
         </Routes>
       </BrowserRouter>
     </>

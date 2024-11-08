@@ -16,14 +16,20 @@ function AiperesonalizedPage() {
       const response = await axios.post(
         `http://localhost:5000/api/students/sendWeaknessStrengthLearningPreference/${userId}`
       );
-      console.log("Weaknesses response:", response.data);
+      console.log("Weaknesses response:", response.data.weaknesses);
       setWeaknesses(response.data.weaknesses);
     };
     fetchData();
+    fetchScore();
   }, []);
+  useEffect(() => {
+    handleClick();
+  }, [weaknesses]);
 
   const handleClick = async () => {
     const joined = weaknesses.join(",");
+    console.log(joined);
+
     try {
       const response = await axios.post(
         "https://iiced-mixtral-46-7b-fastapi.hf.space/generate/",
@@ -60,6 +66,10 @@ function AiperesonalizedPage() {
   const handleSubtopicClick = (subtopic) => {
     console.log("Clicked on subtopic:", subtopic);
     navigate(`/ai-personalized/${subtopic}`);
+  };
+  const handleDocumentsClick = (subtopic) => {
+    console.log("Clicked on subtopic:", subtopic);
+    navigate(`/documents/${subtopic}`);
   };
 
   const handleFinished = async (subtopic) => {
@@ -115,15 +125,20 @@ function AiperesonalizedPage() {
   const progressPercentage =
     totalSubtopics > 0 ? (totalScore / (totalSubtopics * 100)) * 100 : 0;
 
-  useEffect(() => {
-    handleClick();
-    fetchScore();
-  }, []);
+  // useEffect(() => {}, []);
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      {/* Progress Bar */}
-      <div className="mt-4">
+      <div className="flex justify-center mt-4">
+        <button
+          onClick={handleClick}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Generate Learning Path
+        </button>
+      </div>
+      {/* Progress Card */}
+      <div className="absolute top-0 left-0 m-4 w-[400px] h-[100px] bg-grey-200 rounded-lg shadow-lg p-4 text-center">
         <h2 className="text-lg font-bold">
           Progress: {Math.round(progressPercentage)}%
         </h2>
@@ -134,57 +149,50 @@ function AiperesonalizedPage() {
           />
         </div>
       </div>
-      <div className="mt-6">
+      <div className="mt-6 flex justify-center">
         {path.length > 0 && (
-          <ul className="list-disc pl-5">
-            {path.map((subtopic, index) => (
-              <li
-                key={index}
-                className="mb-6 p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-200"
-              >
-                <div
-                  className="cursor-pointer text-blue-500 hover:underline text-xl font-semibold"
-                  onClick={() => handleSubtopicClick(subtopic)}
+          <div className="w-1/2">
+            <ul className="list-none pl-5">
+              {path.map((subtopic, index) => (
+                <li
+                  key={index}
+                  className="mb-6 p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-200"
                 >
-                  {subtopic}
-                </div>
-                <div className="mt-2">
-                  <button
-                    onClick={() => handleFinished(subtopic)}
-                    className="bg-green-500 text-white px-4 py-2 rounded-lg mr-2 transition duration-200 hover:bg-green-600"
+                  <div
+                    className="cursor-pointer text-blue-500 hover:underline text-xl font-semibold"
+                    onClick={() => handleSubtopicClick(subtopic)}
                   >
-                    Finished
-                  </button>
-                  <button
-                    onClick={() => handleQuiz(subtopic)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg transition duration-200 hover:bg-blue-600"
-                  >
-                    Go for Quiz
-                  </button>
-                  {finishedSubtopics[subtopic] && (
-                    <button className="bg-blue-300 text-white px-4 py-2 rounded-lg ml-2">
-                      Finished!
+                    {subtopic}
+                  </div>
+                  <div className="mt-2">
+                    <button
+                      onClick={() => handleFinished(subtopic)}
+                      className="bg-green-500 text-white px-4 py-2 rounded-lg mr-2 transition duration-200 hover:bg-green-600"
+                    >
+                      Finished
                     </button>
-                  )}
-                </div>
-                <div className="mt-2">
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    placeholder="Enter score"
-                    onChange={(e) =>
-                      handleScoreChange(subtopic, Number(e.target.value))
-                    }
-                    className="border border-gray-300 rounded p-2 mt-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-                  />
-                  <p className="text-sm text-gray-500">
-                    Score: {scores[subtopic] || 0}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+                    <button
+                      onClick={() => handleQuiz(subtopic)}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg transition duration-200 hover:bg-blue-600"
+                    >
+                      Go for Quiz
+                    </button>
+                    {/* <button
+                      onClick={() => handleDocumentsClick(subtopic)}
+                      className="bg-yellow-500 text-white px-4 py-2 rounded-lg ml-2 transition duration-200 hover:bg-yellow-600"
+                    >
+                      View Documents
+                    </button> */}
+                    {finishedSubtopics[subtopic] && (
+                      <button className="bg-blue-300 text-white px-4 py-2 rounded-lg ml-2">
+                        Finished!
+                      </button>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
       </div>
     </div>
