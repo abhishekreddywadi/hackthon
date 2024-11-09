@@ -22,20 +22,20 @@ const HeroSection = () => {
               web-based platform designed to make learning smarter, easier, and
               more personalized than ever before.
             </p>
-            {/* <div className="flex flex-row gap-10">
-            <Link to="/mcq">
-              <button className="bg-[#171a8d] text-[#5ce1ff] font-bold px-5 py-3 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out hover:bg-[#0f0e69] hover:shadow-lg">
-                <span>TRY IT NOW</span>
-                <MdKeyboardDoubleArrowRight className="text-xl" />
-              </button>
-            </Link>
-            <a href="https://quine.sh/repo/rajesh-adk-137-StudyPal-793889064">
-              <button className="bg-[#4fe331] text-black font-bold px-5 py-3 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out hover:bg-[#3fb427] hover:shadow-lg">
-                <span>VOTE ON QUINE</span>
-                <MdKeyboardDoubleArrowRight className="text-xl" />
-              </button>
-            </a>
-          </div> */}
+            <div className="flex flex-row gap-10">
+              <Link to="/mcq">
+                <button className="bg-[#171a8d] text-[#5ce1ff] font-bold px-5 py-3 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out hover:bg-[#0f0e69] hover:shadow-lg">
+                  <span>TRY IT NOW</span>
+                  <MdKeyboardDoubleArrowRight className="text-xl" />
+                </button>
+              </Link>
+              <a href="https://quine.sh/repo/rajesh-adk-137-StudyPal-793889064">
+                <button className="bg-[#4fe331] text-black font-bold px-5 py-3 rounded-lg flex items-center justify-center space-x-2 transition duration-300 ease-in-out hover:bg-[#3fb427] hover:shadow-lg">
+                  <span>VOTE ON QUINE</span>
+                  <MdKeyboardDoubleArrowRight className="text-xl" />
+                </button>
+              </a>
+            </div>
           </div>
         </div>
         <div

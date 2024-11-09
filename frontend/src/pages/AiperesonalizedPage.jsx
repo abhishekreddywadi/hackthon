@@ -67,10 +67,6 @@ function AiperesonalizedPage() {
     console.log("Clicked on subtopic:", subtopic);
     navigate(`/ai-personalized/${subtopic}`);
   };
-  const handleDocumentsClick = (subtopic) => {
-    console.log("Clicked on subtopic:", subtopic);
-    navigate(`/documents/${subtopic}`);
-  };
 
   const handleFinished = async (subtopic) => {
     console.log(`Finished subtopic: ${subtopic}`);
@@ -94,11 +90,9 @@ function AiperesonalizedPage() {
     navigate(`/quiz/${encodeURIComponent(subtopic)}`);
   };
 
-  const handleScoreChange = (subtopic, newScore) => {
-    setScores((prevScores) => ({
-      ...prevScores,
-      [subtopic]: newScore,
-    }));
+  const handleDocument = (subtopic) => {
+    console.log(`Viewing document for: ${subtopic}`);
+    navigate(`/documents/${encodeURIComponent(subtopic)}`);
   };
 
   const fetchScore = async () => {
@@ -124,8 +118,6 @@ function AiperesonalizedPage() {
   );
   const progressPercentage =
     totalSubtopics > 0 ? (totalScore / (totalSubtopics * 100)) * 100 : 0;
-
-  // useEffect(() => {}, []);
 
   return (
     <div className="p-6 bg-black min-h-screen">
@@ -177,12 +169,12 @@ function AiperesonalizedPage() {
                     >
                       Go for Quiz
                     </button>
-                    {/* <button
-                      onClick={() => handleDocumentsClick(subtopic)}
+                    <button
+                      onClick={() => handleDocument(subtopic)}
                       className="bg-yellow-500 text-white px-4 py-2 rounded-lg ml-2 transition duration-200 hover:bg-yellow-600"
                     >
-                      View Documents
-                    </button> */}
+                      View Document
+                    </button>
                     {finishedSubtopics[subtopic] && (
                       <button className="bg-blue-300 text-white px-4 py-2 rounded-lg ml-2">
                         Finished!

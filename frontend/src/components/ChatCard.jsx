@@ -19,7 +19,9 @@ function ChatCard() {
             <div className="font-bold text-2xl mb-2 text-gray-800">
               Ai powered personalized chat{" "}
             </div>
-            <p className="text-gray-600 text-base">Preferences: Self Reading</p>
+            <p className="text-gray-600 text-base">
+              Preferences: chat with bot
+            </p>
           </div>
         </div>
       </div>
