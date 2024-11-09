@@ -14,7 +14,7 @@ function Home() {
         </div>
         <HeroSection />
       </div>
-      <div className=" flex justify-center items-center gap-10 bg-black text-white">
+      <div className=" flex justify-evenly items-center gap-10 bg-black text-white">
         <AiPoweredPath />
         <ChatCard />
         <LeaderBoardCard />

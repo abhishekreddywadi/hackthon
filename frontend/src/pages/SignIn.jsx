@@ -28,10 +28,10 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+    <div className="flex items-center justify-center min-h-screen bg-black">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-md w-96"
+        className="bg-white p-8 rounded-lg shadow-white shadow-lg w-96 flex flex-col items-center "
       >
         <h2 className="text-2xl font-bold mb-6 text-center">Sign In</h2>
         {error && <p className="text-red-500 mb-4">{error}</p>}
@@ -41,7 +41,7 @@ const SignIn = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="border border-gray-300 p-3 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+          className="border border-gray-300 p-3 mb-4 w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
         />
         <input
           type="password"
@@ -49,7 +49,7 @@ const SignIn = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="border border-gray-300 p-3 mb-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+          className="border border-gray-300 p-3 mb-4  w-full rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
         />
         <button
           type="submit"

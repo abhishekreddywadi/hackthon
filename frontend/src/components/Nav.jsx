@@ -1,42 +1,73 @@
-import { Link } from "react-router-dom";
-import { FaGithub } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
+  const userId = localStorage.getItem("userId");
+  const location = useLocation();
+  const handleSignOut = () => {
+    localStorage.removeItem("userId");
+  };
   return (
-    <div className="navbar flex justify-center">
-      <header className="w-[80%] h-16 flex justify-between text-white mt-2 items-center mx-5">
-        <Link to="/">
-          {" "}
-          <div className="text-3xl font-[700] tracking-wider">
-            <span>Study</span>
-            <span className="text-blue-400">Pal</span>
+    <div className="navbar flex justify-center items-center">
+      <header className="w-[80%] h-16 flex justify-between text-white mt-2 mx-5">
+        <Link
+          to="/"
+          className={
+            location.pathname === "/" ? "border-b-2 border-blue-500" : ""
+          }
+        >
+          <div className="text-md font-[700] tracking-wider">
+            <span className="text-blue-400">Home</span>
           </div>
         </Link>
-        <div>
-          <ul className="flex flex-row justify-center gap-3 md:gap-10 place-items-center">
-            <Link to="/mcq">
-              <li className="items-center font-[500] hover:text-blue-400">
-                MCQ
-              </li>
+        {userId ? (
+          <>
+            <Link
+              to="/profile"
+              className={
+                location.pathname === "/profile"
+                  ? "border-b-2 border-blue-500"
+                  : ""
+              }
+            >
+              profile
             </Link>
-            <Link to="/home">
-              <li className="items-center font-[500] hover:text-blue-400">
-                REVISION
-              </li>
+            <Link to="/signin">
+              <button
+                onClick={handleSignOut}
+                className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Sign Out
+              </button>
             </Link>
-          </ul>
-        </div>
-        <div>
-          {/* <button className='bg-transparent rounded-xl w-20 h-8'>LOGIN</button> */}
-        </div>
+          </>
+        ) : (
+          <>
+            <Link to="/signin">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Sign in
+              </button>
+            </Link>
+            <Link to="/signup">
+              <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Sign up
+              </button>
+            </Link>
+          </>
+        )}
       </header>
       <div className="flex justify-center items-center">
-        <a href="https://github.com/rajesh-adk-137/StudyPal">
-          <button className="bg-gray-300 hover:bg-gray-400 text-black md:px-5 md:py-2 rounded-md md:flex items-center space-x-2 hidden">
-            <FaGithub />
-            <span>GitHub</span>
-          </button>
-        </a>
+        <div className="flex justify-center gap-4">
+          <Link to="/signup">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Sign Up
+            </button>
+          </Link>
+          <Link to="/signin">
+            <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              Sign In
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

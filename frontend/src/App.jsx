@@ -9,7 +9,7 @@ import Quiz from "./components/Quiz";
 import ChatWithAi from "./pages/ChatWithAi";
 import Documents from "./components/Documents";
 import LeaderBoard from "./components/LeaderBoard";
-
+import Profile from "./components/Profile";
 function App() {
   return (
     <>
@@ -24,6 +24,7 @@ function App() {
           <Route path="/quiz/:subtopic" element={<Quiz />} />
           <Route path="/chat" element={<ChatWithAi />} />
           <Route path="/leaderboard" element={<LeaderBoard />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>

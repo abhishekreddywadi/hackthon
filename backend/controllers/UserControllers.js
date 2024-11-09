@@ -158,6 +158,42 @@ const getAllUsersByScore = async (req, res) => {
   const users = await User.find({}).sort({ score: -1 });
   res.status(200).json(users);
 };
+const updateUserDetails = async (req, res) => {
+  const userId = req.params.userId;
+  const { name, email, password, strengths, weaknesses, preferences } =
+    req.body;
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, {
+      name,
+      email,
+      password,
+      strengths,
+      weaknesses,
+      preferences,
+    });
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+    res
+      .status(200)
+      .json({ message: "User details updated successfully", user });
+  } catch (error) {
+    res.status(500).json({ message: "Error updating user details", error });
+  }
+};
+const getUserDetails = async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const user = await User.findById(userId).select("-password");
+    if (!user) {
+      return res.status(401).json({ message: "User not found" });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Error retrieving user details", error });
+  }
+};
 
 module.exports = {
   signUp,
@@ -167,4 +203,6 @@ module.exports = {
   updateScore,
   getAllUsersByScore,
   getScore,
+  updateUserDetails,
+  getUserDetails,
 };

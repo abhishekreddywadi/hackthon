@@ -128,7 +128,7 @@ function AiperesonalizedPage() {
   // useEffect(() => {}, []);
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className="p-6 bg-black min-h-screen">
       <div className="flex justify-center mt-4">
         <button
           onClick={handleClick}
@@ -138,11 +138,11 @@ function AiperesonalizedPage() {
         </button>
       </div>
       {/* Progress Card */}
-      <div className="absolute top-0 left-0 m-4 w-[400px] h-[100px] bg-grey-200 rounded-lg shadow-lg p-4 text-center">
+      <div className="absolute top-0 left-0 m-4 w-[400px] h-[100px] bg-white rounded-lg shadow-lg p-4 text-center">
         <h2 className="text-lg font-bold">
           Progress: {Math.round(progressPercentage)}%
         </h2>
-        <div className="bg-gray-200 rounded-full h-4">
+        <div className="bg-white rounded-full h-4">
           <div
             className="bg-green-500 h-4 rounded-full transition-all duration-300"
             style={{ width: `${progressPercentage}%` }}
@@ -156,7 +156,7 @@ function AiperesonalizedPage() {
               {path.map((subtopic, index) => (
                 <li
                   key={index}
-                  className="mb-6 p-4 bg-white rounded-lg shadow hover:shadow-lg transition-shadow duration-200"
+                  className="mb-6 p-4 bg-slate-200 rounded-lg shadow hover:shadow-lg transition-shadow duration-200"
                 >
                   <div
                     className="cursor-pointer text-blue-500 hover:underline text-xl font-semibold"

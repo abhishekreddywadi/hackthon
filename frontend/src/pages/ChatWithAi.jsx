@@ -48,7 +48,7 @@ function ChatWithAi() {
 
   return (
     <div className="flex flex-col h-screen p-4 bg-gray-100">
-      <div className="flex-1 overflow-y-auto p-4 bg-white rounded-lg shadow-md">
+      <div className="flex-1 overflow-y-auto p-4 bg-black rounded-lg shadow-md">
         {messages.map((message, index) => (
           <div
             key={index}

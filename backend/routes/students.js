@@ -7,6 +7,8 @@ const {
   updateScore,
   getAllUsersByScore,
   getScore,
+  updateUserDetails,
+  getUserDetails,
 } = require("../controllers/UserControllers"); // Import the signUp function
 const authMiddleware = require("../middleware/middleware");
 const router = express.Router();
@@ -23,4 +25,6 @@ router.patch("/learning-path/:userId", updateLearningPath); // New route for upd
 router.patch("/score/:userId", updateScore); // New route for updating score
 router.get("/all-users", getAllUsersByScore); // New route for getting all users by score
 router.get("/score/:userId", getScore); // New route for getting score
+router.put("/user-details/:userId", updateUserDetails);
+router.get("/user-details/:userId", getUserDetails); // New route for getting user details
 module.exports = router;
