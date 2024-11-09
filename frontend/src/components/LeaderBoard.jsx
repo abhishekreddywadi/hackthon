@@ -18,7 +18,6 @@ function LeaderBoard() {
 
     fetchLeaderboard();
   }, []);
-
   return (
     <div className="leaderboard text-center">
       <h1 className="text-3xl font-bold mb-6">Leaderboard</h1>

@@ -46,7 +46,7 @@ const SignUp = () => {
       <div className="flex items-center justify-center min-h-screen bg-black">
         <form
           onSubmit={handleSubmit}
-          className="max-w-md mx-auto p-4 bg-white shadow-white shadow-lg rounded-2xl"
+          className="max-w-md mx-auto p-4 bg-white  shadow-white  shadow-lg rounded-2xl"
         >
           <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
           {error && <p className="text-red-500">{error}</p>}
@@ -57,7 +57,7 @@ const SignUp = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            className="border p-2 mb-4 w-full"
+            className="border p-2 mb-4 w-full "
           />
           <input
             type="email"

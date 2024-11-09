@@ -22,22 +22,21 @@ function AiperesonalizedPage() {
     fetchData();
     fetchScore();
   }, []);
+  const joined = weaknesses.join(",");
   useEffect(() => {
     handleClick();
-  }, [weaknesses]);
+  }, [weaknesses, joined]);
 
   const handleClick = async () => {
-    const joined = weaknesses.join(",");
-    console.log(joined);
-
+    // console.log(joined);
     try {
       const response = await axios.post(
         "https://iiced-mixtral-46-7b-fastapi.hf.space/generate/",
         {
-          prompt: joined,
+          prompt: `${joined}`,
           history: [],
           system_prompt:
-            "`Generate a learning path for the Prompt Given. Provide 6 main subtopics skills to learn just say sub topics headings and don't say anything else",
+            "Generate a learning path for the Prompt Given. Provide 6 main subtopics skills to learn just say sub topics headings and don't say anything else",
         },
         {
           headers: {
@@ -130,7 +129,7 @@ function AiperesonalizedPage() {
         </button>
       </div>
       {/* Progress Card */}
-      <div className="absolute top-0 left-0 m-4 w-[400px] h-[100px] bg-white rounded-lg shadow-lg p-4 text-center md:w-[300px] sm:w-full">
+      <div className="absolute top-0 left-0 m-4 w-[400px] h-[100px] bg-white rounded-lg shadow-lg p-4 text-center">
         <h2 className="text-lg font-bold">
           Progress: {Math.round(progressPercentage)}%
         </h2>
@@ -143,7 +142,7 @@ function AiperesonalizedPage() {
       </div>
       <div className="mt-6 flex justify-center">
         {path.length > 0 && (
-          <div className="w-1/2 md:w-full sm:w-full">
+          <div className="w-1/2">
             <ul className="list-none pl-5">
               {path.map((subtopic, index) => (
                 <li

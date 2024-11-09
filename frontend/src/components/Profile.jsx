@@ -53,8 +53,8 @@ const Profile = () => {
 
   return (
     <>
-      <div className="h-screen bg-gray-200 dark:bg-gray-800 flex flex-wrap items-center justify-center">
-        <div className="container lg:w-2/6 xl:w-2/7 sm:w-full md:w-2/3 bg-white shadow-lg transform duration-200 easy-in-out">
+      <div className="h-screen bg-gray-200 dark:bg-gray-800 flex flex-wrap items-center justify-center p-4">
+        <div className="container lg:w-2/6 xl:w-2/7 sm:w-full md:w-2/3 bg-white shadow-lg transform duration-200 easy-in-out p-4">
           <div className="h-32 overflow-hidden">
             <img
               className="w-full"
@@ -63,7 +63,7 @@ const Profile = () => {
             />
           </div>
 
-          <div className="text-center px-14">
+          <div className="text-center px-4 py-2">
             <h2 className="text-gray-800 text-3xl font-bold">{student.name}</h2>
             <a
               className="text-gray-400 mt-2 hover:text-blue-500"
@@ -76,18 +76,18 @@ const Profile = () => {
               `Profile Score ={student.score}`
             </p>
           </div>
-          <hr className="mt-6" />
-          <div className="flex bg-gray-50">
+          <hr className="mt-6 mb-6" />
+          <div className="flex bg-gray-50 p-4">
             <div className="text-center w-1/2 p-4 hover:bg-gray-100 cursor-pointer">
               <p>
-                <span className="font-semibold">strengths is </span>{" "}
+                <span className="font-semibold">Strengths are </span>{" "}
                 {student.strengths}
               </p>
             </div>
             <div className="border"></div>
             <div className="text-center w-1/2 p-4 hover:bg-gray-100 cursor-pointer">
               <p>
-                <span className="font-semibold">weaknesses is </span>{" "}
+                <span className="font-semibold">Weaknesses are </span>{" "}
                 {student.weaknesses}
               </p>
             </div>

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
@@ -9,64 +8,38 @@ function Quiz() {
   const [submitted, setSubmitted] = useState(false);
   const [correctAnswers, setCorrectAnswers] = useState([]);
 
-  const fetchQuiz = async () => {
-    try {
-      const response = await axios.post(
-        "https://iiced-mixtral-46-7b-fastapi.hf.space/generate/",
-        {
-          prompt: subtopic,
-          history: [],
-          system_prompt:
-            "`Generate a quiz for the topic given. Provide 10 questions and their correct answers in the format: 'Question 1: Question? Answer 1: Answer'`",
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (typeof response.data.response === "string") {
-        const rawResponse = response.data.response.trim();
-        console.log("Raw Response:", rawResponse); // Log the raw response
-
-        // Split the response into lines
-        const lines = rawResponse
-          .split("\n")
-          .filter((line) => line.trim() !== "");
-
-        const tempQuestions = [];
-        const tempAnswers = [];
-
-        // Iterate through the lines to extract questions and answers
-        for (let i = 0; i < lines.length; i++) {
-          const line = lines[i].trim();
-          if (line.startsWith("Question")) {
-            const question = line.split(":")[1].trim(); // Get the question part
-            tempQuestions.push(question);
-          } else if (line.startsWith("Answer")) {
-            const answer = line.split(":")[1].trim(); // Get the answer part
-            tempAnswers.push(answer);
-          }
-        }
-
-        console.log("Parsed Questions:", tempQuestions); // Log parsed questions
-        console.log("Parsed Answers:", tempAnswers); // Log parsed answers
-
-        setQuestions(tempQuestions);
-        setCorrectAnswers(tempAnswers);
-      } else {
-        console.error("Expected a string but got:", response.data.response);
-        setQuestions([]);
-      }
-    } catch (error) {
-      console.error("Error making request:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchQuiz();
-  }, [subtopic]);
+    // Default quiz questions and answers
+    const defaultQuiz = {
+      questions: [
+        "What is the most popular front-end framework for building user interfaces?",
+        "Which web technology allows for dynamic content on web pages?",
+        "What is the primary language used for backend development in Node.js?",
+        "What is the purpose of the 'this' keyword in JavaScript?",
+        "What is the difference between null and undefined in JavaScript?",
+        "How do you handle errors in JavaScript?",
+        "What is the concept of 'closure' in JavaScript?",
+        "What is the difference between '==' and '===' in JavaScript?",
+        "How do you optimize the performance of a slow web page?",
+        "What is the role of a Content Delivery Network (CDN) in web development?",
+      ],
+      answers: [
+        "React",
+        "JavaScript",
+        "JavaScript",
+        "To refer to the current object",
+        "Null represents the intentional absence of any object value, while undefined represents an uninitialized variable.",
+        "Using try-catch blocks",
+        "A closure is a function that has access to its own scope and the scope of its parent functions.",
+        "The '==' operator checks for value equality, while the '===' operator checks for both value and type equality.",
+        "Optimizing images, minifying code, and using caching.",
+        "A CDN reduces the latency of content delivery by distributing it across multiple servers.",
+      ],
+    };
+
+    setQuestions(defaultQuiz.questions);
+    setCorrectAnswers(defaultQuiz.answers);
+  }, []);
 
   const handleAnswerChange = (index, answer) => {
     setUserAnswers((prevAnswers) => ({
@@ -96,12 +69,12 @@ function Quiz() {
 
   return (
     <div className="flex justify-center items-center bg-black">
-      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg transition-transform transform md:max-w-4xl lg:max-w-6xl xl:max-w-8xl">
+      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg transition-transform transform">
         <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
           Quiz: {subtopic}
         </h1>
         {questions.length > 0 ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit}>
             {questions.map((question, index) => (
               <div key={index} className="mb-6">
                 <label className="block text-lg font-semibold text-gray-800">

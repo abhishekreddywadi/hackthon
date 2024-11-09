@@ -5,9 +5,9 @@ import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <div className="flex flex-col gap-10 justify-between items-center bg-gray-950 text-gray-300 py-6 pt-10 text-sm md:px-10">
-      <div className="mx-auto flex flex-wrap justify-evenly items-center w-full md:justify-between">
-        <div className="flex flex-col gap-1 justify-center items-start md:order-last">
+    <div className="flex flex-col gap-10 justify-between items-center bg-gray-950 text-gray-300 py-6 pt-10 text-sm">
+      <div className=" mx-auto flex  justify-evenly items-center w-full ">
+        <div className="flex flex-col gap-1 justify-center items-start">
           <Link to="/">
             <div className="text-2xl md:text-4xl font-bold">
               <span>Study</span>
@@ -17,7 +17,7 @@ const Footer = () => {
           <div className="text-xl text-gray-600">
             Your Personalized Learning Companion.
           </div>
-          <div className="mt-3 flex text-xl gap-2 text-gray-500 md:order-first">
+          <div className="mt-3 flex text-xl gap-2 text-gray-500 ">
             <FaFacebook className="hover:text-white" />
             <FaInstagram className="hover:text-white" />
             <FaTiktok className="hover:text-white" />
@@ -25,7 +25,7 @@ const Footer = () => {
             <FaLinkedin className="hover:text-white" />
           </div>
         </div>
-        <div className="flex flex-col gap-3 md:flex-row md:justify-end items-start w-full md:w-2/5">
+        <div className="flex justify-end items-start gap-x-14 md:gap-x-32 w-2/5">
           <div className="flex flex-col gap-3">
             <a href="https://github.com/rajesh-adk-137">
               <div className="hover:text-white hover:cursor-pointer">
