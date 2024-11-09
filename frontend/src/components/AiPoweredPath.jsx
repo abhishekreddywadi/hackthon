@@ -5,7 +5,7 @@ function AiPoweredPath() {
   return (
     <div
       onClick={() => navigate("/ai-personalized")}
-      className="p-4 cursor-pointer  transition duration-300 h-[500px] md:w-2/6"
+      className="p-4 cursor-pointer transition duration-300 h-auto md:h-[500px] w-full md:w-2/6"
     >
       <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
         AI learning path

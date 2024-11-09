@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const VideoCard = ({ video }) => {
   return (
-    <div className="border rounded-lg shadow-md p-4 m-2">
+    <div className="border rounded-lg shadow-md p-4 m-2 max-w-sm md:max-w-lg lg:max-w-4xl xl:max-w-6xl mx-auto">
       <img
         src={video.thumbnail.static}
         alt={video.title}

@@ -96,12 +96,12 @@ function Quiz() {
 
   return (
     <div className="flex justify-center items-center bg-black">
-      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg transition-transform transform">
+      <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg transition-transform transform md:max-w-4xl lg:max-w-6xl xl:max-w-8xl">
         <h1 className="text-3xl font-bold mb-6 text-center text-blue-600">
           Quiz: {subtopic}
         </h1>
         {questions.length > 0 ? (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-4">
             {questions.map((question, index) => (
               <div key={index} className="mb-6">
                 <label className="block text-lg font-semibold text-gray-800">
